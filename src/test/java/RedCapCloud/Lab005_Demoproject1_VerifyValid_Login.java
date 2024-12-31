@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class Lab005_Demoproject1_VerifyValid_Login {
     @Test
-    public void fn1() throws Exception{
+    public void fn1() throws Exception {
         ChromeOptions chrome = new ChromeOptions();
         chrome.addArguments("--start-maximized");
 
@@ -21,10 +21,10 @@ public class Lab005_Demoproject1_VerifyValid_Login {
 
         // ************ Step 1 - Clicking Make Appointment button **********************
 
-            //<a
-            // id="btn-make-appointment"
-            // href="./profile.php#login"
-            // class="btn btn-dark btn-lg">Make Appointment</a>
+        //<a
+        // id="btn-make-appointment"
+        // href="./profile.php#login"
+        // class="btn btn-dark btn-lg">Make Appointment</a>
         WebElement make_appointment = driver.findElement(By.id("btn-make-appointment"));
         make_appointment.click();
         Thread.sleep(3000);
@@ -60,6 +60,24 @@ public class Lab005_Demoproject1_VerifyValid_Login {
         WebElement Submit = driver.findElement(By.id("btn-login"));
         Submit.click();
         assertThat(driver.getCurrentUrl().equals("https://katalon-demo-cura.herokuapp.com/#appointment"));
+
+        //Validating Label for Facility
+        //<label for="combo_facility" class="col-sm-offset-3 col-sm-2 control-label">Facility</label>
+        WebElement label = driver.findElement(By.xpath("//label[text()='Facility']"));
+        String associatedElementId = label.getAttribute("for");
+        WebElement inputField = driver.findElement(By.id(associatedElementId));
+        assertThat(driver.findElement(By.id(associatedElementId)).isDisplayed());
+
+        //Validating Label for Healthcare Program
+        //<label class="col-sm-offset-3 col-sm-2 control-label">Healthcare Program</label>
+       // xpath - //*[@id="appointment"]/div/div/form/div[3]/label
+        WebElement label2 = driver.findElement(By.xpath("//label[@id='appointment']"));
+        WebElement label3 = driver.findElement(By.xpath("//label[contains(text(),'Healthcare Program')"));
+
+
+
+
+        driver.quit();
 
 
     }
